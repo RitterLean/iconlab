@@ -1,0 +1,11 @@
+<div ng-controller="formCtrlSessions" id="example-form" action="#">
+    <h2>All session partners are here:</h2>
+    <ul>
+        <li ng-repeat="upload in sessions">
+
+            <!--<a ng-href="uploads/{{upload.names}}"> {{upload}} <a> </br>-->
+            <a href="#/uploads/{{upload}}">{{upload}}</a></br>
+
+            </li>
+    </ul>
+</div>

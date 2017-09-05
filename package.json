@@ -1,0 +1,25 @@
+{
+  "name": "160814_mean_multer_mongoose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-messages": "^1.5.8",
+    "angular-resource": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "mongoose": "^4.10.5",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.0",
+    "ng-file-upload": "^12.0.4",
+    "underscore": "^1.8.3"
+  }
+}

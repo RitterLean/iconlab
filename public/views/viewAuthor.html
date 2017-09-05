@@ -1,0 +1,27 @@
+<div ng-controller="formCtrlAuthor" id="example-form" action="#">
+    <!-- <ul>
+        <li ng-repeat="upload in author">
+                <h2>All uploads by {{upload.sessionName[0]}} are here</h2> -->
+            <!--<h2>Upload By</h2>
+                <p>{{upload.name}}</p>
+                <h2>CreatorArtist</h2>
+                <p>{{uploadCreatorArtist}}</p>
+                <h2>TAGS</h2>
+                <p>{{upload.tags}}</p>
+                 <h2>All</h2>
+                <p>{{upload}}</p>-->
+
+            <!--<a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>-->
+            <!-- <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}">Info to images</a></br>
+            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+            </li>
+    </ul> -->
+
+    <div class="bricklayer" ng-cloak>
+            <!-- append -->
+            <div bricklayer-append ng-repeat="upload in author" ng-cloak>
+                    <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' ng-href='#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}'/>
+                    <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}">Info to this image</a></br>
+            </div>
+
+</div>

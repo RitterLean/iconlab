@@ -1,0 +1,53 @@
+<div ng-controller="CtrlUpdateImageInformation">
+    <h2>Image Information</h2>
+
+     <li ng-repeat="upload in ::image">  
+    <!-- <li ng-model= image> -->
+        <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+        <!--<a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+
+    </li>
+
+
+    <form ng-submit="submit()">
+        <legend>Please provide basic image information:</legend>
+
+
+        <label for="artist">artist:</label>
+        <tags-input ng-model="upload.imageInformation.artist" use-strings="true"></tags-input>
+        <br/>
+
+
+        <label for="publishingYear">publishingYear:</label>
+        <tags-input ng-model="upload.imageInformation.publishingYear" use-strings="true"></tags-input>
+
+        <br/>
+
+        <label for="publishingLocation">publishingLocation:</label>
+        <tags-input ng-model="upload.imageInformation.publishingLocation" use-strings="true"></tags-input>
+
+        <br/>
+
+
+        <label for="medium">medium:</label>
+        <tags-input ng-model="upload.imageInformation.medium" use-strings="true"></tags-input>
+
+        <br/>
+
+
+
+        <label for="form">form (digital analogue):</label>
+        <tags-input ng-model="upload.imageInformation.form" use-strings="true"></tags-input>
+        <br/>
+        <!--<label for="tags">TEST</label>
+        <tags-input ng-model="tags"></tags-input>-->
+
+
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+<!--<a href="#/viewAll">View All</a></br>
+<a href="#/viewSessions">View Sessions by</a></br>-->
+<a href="#/formImageDes">Next</a></br>

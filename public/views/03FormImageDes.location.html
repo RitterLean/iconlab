@@ -1,0 +1,26 @@
+<div ng-controller="CtrlUpdateImageDescripLoc">
+
+    <h2>Image Description</h2>
+    <li ng-repeat="upload in ::image">
+        <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+        <!--<a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'  annotorious-annotate/>
+
+
+    </li>
+
+    <!--<form ng-submit="submit()">
+        <legend>Upload a new file here:</legend>-->
+
+        <label for="revolutionLocation">revolutionLocation (Can you locate the ‘revolutionary’ moment/element in the image? You can use the tool to mark it. Not working ENTIRELY):</label>
+        <!--<input type="text" name="revolutionLocation" id="revolutionLocation" ng-model="uploadimageDescrp.revolutionLocation" />-->
+        <br/>
+
+        <!--<input type="submit" value="Submit" />
+    </form>-->
+</div>
+
+
+<a href="#/formPRelation">Next</a></br>
+<!--<a href="#/viewAll">View All</a></br>
+<a href="#/viewSessions">View Sessions by</a></br>-->

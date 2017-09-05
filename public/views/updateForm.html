@@ -1,0 +1,27 @@
+<div ng-controller="CtrlUpdateData" id="example-form" action="#">
+    <h2>Update</h2>
+    <ul>
+        <li ng-repeat="upload in ::image">
+            <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+        </li>
+
+
+
+
+
+        <form ng-submit="submit()">
+            <legend>Update file here:</legend>
+             <label for="sessionName">Name:</label>
+        <input type="text" name="sessionName" id="sessionName" ng-model="upload.sessionName" required/>
+        <br/>
+
+        <label for="sessionIdentifier">E–Mail:</label>
+        <input type="text" name="sessionIdentifier" id="sessionIdentifier" ng-model="upload.sessionIdentifier" required/>
+            <input type="submit" value="Update" />
+
+        </form>
+
+
+    </ul>
+</div>

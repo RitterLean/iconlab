@@ -1,0 +1,21 @@
+{
+  "name": "160814_mean_multer_mongoose",
+  "description": "production version",
+  "main": "app.js",
+  "authors": [
+    "RitterLean <nhannd@hotmail.de>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ng-tags-input": "3.2.0",
+    "angular-annotorious": "^1.0.7"
+  }
+}

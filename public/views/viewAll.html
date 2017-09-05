@@ -1,0 +1,29 @@
+<body ng-app="fileUpload">
+    <div ng-controller="CtrlUpload" id="example-form" action="#">
+        <h2>All uploads are here:</h2>
+        <!-- <ul>
+        <li ng-repeat="upload in all"> -->
+        <!-- <p>{{upload.file.path}}</p>
+                <p>{{upload.name}}</p>
+                <h3>partner</h3>
+                <p>{{upload.sessionName}}</p>
+                <h3>tags</h3>
+                <p>{{upload.tags}}</p>
+                <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br> -->
+        <!-- <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+        </li>
+        </ul> -->
+        <div class="bricklayer" ng-cloak>
+            <!-- append -->
+            <div bricklayer-append ng-repeat="upload in all" ng-cloak>
+                    <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' ng-href='#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}'/>
+                    <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}">Info to this image</a></br>
+            </div>
+
+
+
+
+        </div>
+</body>
+
+</html>

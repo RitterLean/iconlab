@@ -1,0 +1,27 @@
+<div ng-controller="CtrlUpdateImageDescrip">
+
+    <h2>Image Description</h2>
+
+
+    <li ng-repeat="upload in ::image">
+        <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+        <!--<a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+
+    </li>
+
+    <form ng-submit="submit()">
+        <label for="motives">motives (what motives are in this image):</label>
+        <tags-input ame="motives" id="motives" ng-model="upload.imageDescrp.motives" use-strings="true"></tags-input>
+        <br/>
+
+        <label for="motivesRevolution">motivesRevolution (what does it make an image of revolution):</label>
+         <tags-input name="motivesRevolution" id="motivesRevolution" ng-model="upload.imageDescrp.motivesRevolution" use-strings="true"></tags-input>
+        <br/>
+
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+<a href="#/formImageDesLocation">Next</a></br>
+<!--<a href="#/viewSessions">View Sessions by</a></br>-->

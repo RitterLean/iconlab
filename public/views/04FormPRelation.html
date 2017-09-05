@@ -1,0 +1,38 @@
+<div ng-controller="CtrlUpdatePersonalRelation">
+
+    <h2>Personal relationship</h2>
+
+    <li ng-repeat="upload in ::image">
+        <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+        <!--<a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+
+    </li>
+
+    <form ng-submit="submit()">
+
+        <label for="source">source:</label>
+        <tags-input name="source" id="source" ng-model="upload.personalRelation.source" use-strings="true"></tags-input>
+        <br/>
+
+        <label for="placeFoundFirst">placeFoundFirst (where did you find it? Where did you retrieve it?):</label>
+        <tags-input name="placeFoundFirst" id="placeFoundFirst" ng-model="upload.personalRelation.placeFoundFirst"
+            use-strings="true"></tags-input>
+        <br/>
+
+        <label for="dateFoundFirst">dateFoundFirst (where did you find it the first time):</label>
+        <tags-input name="dateFoundFirst" id="dateFoundFirst" ng-model="upload.personalRelation.dateFoundFirst" use-strings="true"></tags-input>
+        <br/>
+
+
+        <label for="time">time (when did you find it the first time?):</label>
+        <tags-input name="time" id="time" ng-model="upload.personalRelation.time" use-strings="true"></tags-input>
+        <br/>
+
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+</br>
+
+<a href="#/formPRelationSub">Next</a></br>
+<!--<a href="#/viewSessions">View Sessions by</a></br>-->
