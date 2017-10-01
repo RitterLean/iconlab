@@ -24,12 +24,30 @@
 }
 
 /** Hint/help popup **/
+@font-face {
+  font-family: AkkuratStd;
+  font-weight: regular;
+  src: local('AkkuratStd'), url('fonts/AkkuratStd-Regular.otf'), format('opentype');
+}
 
+@font-face {
+  font-family: AkkuratStd;
+  font-weight: bold;
+  src: local('AkkuratStd'), url('fonts/AkkuratStd-Bold.otf'), format('opentype');
+}
+
+@font-face {
+  font-family: AkkuratStd;
+  font-weight: italic;
+  src: local('AkkuratStd'), url('fonts/AkkuratStd-Italic.otf'), format('opentype');
+}
 .annotorious-hint-msg {
   background-color:rgba(0,0,0,0.5);
   margin:4px;
   padding:8px 15px 8px 30px;
-  font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+  /* font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; */
+  font-family: AkkuratStd;
+
   line-height: normal;
   font-size:12px;
   color:#fff;

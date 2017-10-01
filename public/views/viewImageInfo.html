@@ -1,0 +1,144 @@
+<div ng-controller="CollapseDemoCtrl">
+        <!-- <p>Resize window to less than 768 pixels to display mobile menu toggle button.</p> -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <!-- <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button> -->
+                <a class="navbar-brand" href="#">ICONLAB</a>
+            </div>
+            <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+                <ul class="nav navbar-nav">
+                    <!-- <li><a href="#/viewAll">View All</a></li> -->
+                    <!-- <li><a href="#/viewSessions">View Sessions by</a></li> -->
+                    <li><a href="#/UploadForm">Contribute</a></li>
+                    <li><a href="#/about">About</a></li>
+    
+                    <li uib-dropdown>
+                        <a href="#" uib-dropdown-toggle>Database<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/viewSessions">By Sessions</a></li>
+                            <li><a href="#/topics">By Topics</a></li>
+                        </ul>
+                    </li>
+                </ul>
+    
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+
+<div ng-controller="CtrlImageInfo" id="example-form" action="#">
+    <h2>Image is here:</h2>
+    <ul>
+
+        <li ng-repeat="upload in ::image">
+            <!--<h2>Upload By</h2>
+            <p>{{upload.name}}</p>
+            <h2>CreatorArtist</h2>
+            <p>{{uploadCreatorArtist}}</p>
+            <h2>TAGS</h2>
+            <p>{{upload.tags}}</p>
+            <h2>All</h2>
+            <p>{{upload}}</p>-->
+
+            <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+            <!--<a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
+            <!--<img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' annotorious-annotate ng-model="test"/>-->
+            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'/>
+            <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}">Return</a></br>            
+            
+
+        </li>
+
+    </ul>
+
+    <h2>Session</h2>
+    <form ng-submit="submit()">
+        <label for="sessionName">Name:</label>
+        <!--<input type="text" name="sessionName" id="sessionName" ng-model="upload.sessionName" required/>-->
+        <tags-input ng-model="upload.sessionName" use-strings="true" maxTags="1"></tags-input>
+        <br/>
+
+
+        <label for="sessionIdentifier">E–Mail:</label>
+        <tags-input ng-model="upload.sessionIdentifier" use-strings="true"></tags-input>
+
+        <h2>Image Information</h2>
+
+
+
+        <label for="artist">artist:</label>
+        <tags-input ng-model="upload.imageInformation.artist" use-strings="true"></tags-input>
+        <br/>
+
+
+        <label for="publishingYear">publishingYear:</label>
+        <tags-input ng-model="upload.imageInformation.publishingYear" use-strings="true"></tags-input>
+
+        <br/>
+
+        <label for="publishingLocation">publishingLocation:</label>
+        <tags-input ng-model="upload.imageInformation.publishingLocation" use-strings="true"></tags-input>
+
+        <br/>
+
+
+        <label for="medium">medium:</label>
+        <tags-input ng-model="upload.imageInformation.medium" use-strings="true"></tags-input>
+
+        <br/>
+
+
+
+        <label for="form">form (digital analogue):</label>
+        <tags-input ng-model="upload.imageInformation.form" use-strings="true"></tags-input>
+        <br/>
+
+
+
+
+
+        <h2>Image Description</h2>
+        <label for="motives">motives (what motives are in this image):</label>
+        <tags-input name="motives" id="motives" ng-model="upload.imageDescrp.motives" use-strings="true"></tags-input>
+        <br/>
+
+
+        <label for="motivesRevolution">motivesRevolution (what does it make an image of revolution):</label>
+        <tags-input name="motivesRevolution" id="motivesRevolution" ng-model="upload.imageDescrp.motivesRevolution" use-strings="true"></tags-input>
+        <br/>
+
+        <h2>Personal relationship</h2>
+
+        <label for="source">source:</label>
+        <tags-input name="source" id="source" ng-model="upload.personalRelation.source" use-strings="true"></tags-input>
+        <br/>
+
+        <label for="placeFoundFirst">placeFoundFirst (where did you find it? Where did you retrieve it?):</label>
+        <tags-input name="placeFoundFirst" id="placeFoundFirst" ng-model="upload.personalRelation.placeFoundFirst"
+            use-strings="true"></tags-input>
+        <br/>
+
+        <label for="dateFoundFirst">dateFoundFirst (where did you find it the first time):</label>
+        <tags-input name="dateFoundFirst" id="dateFoundFirst" ng-model="upload.personalRelation.dateFoundFirst" use-strings="true"></tags-input>
+        <br/>
+
+
+        <label for="time">time (when did you find it the first time?):</label>
+        <tags-input name="time" id="time" ng-model="upload.personalRelation.time" use-strings="true"></tags-input>
+        <br/>
+
+        <input type="submit" value="Submit" />
+    </form>
+
+</div>

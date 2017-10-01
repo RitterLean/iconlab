@@ -6,21 +6,26 @@
     <title>ICONLAB</title>
     <link rel="stylesheet" href="/css/ng-tags-input.min.css">
     <link rel="stylesheet" href="/css/annotorious.css">
-    <link rel="stylesheet" href="/css/anno-vanilla-rest-plugin.css">
+    <!-- <link rel="stylesheet" href="/css/anno-vanilla-rest-plugin.css"> -->
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/bricklayer.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
     
+    <!-- <link rel="stylesheet" href="/css/bricklayer.min.css"> -->
 
-        <!--<link rel="stylesheet" href="http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css">-->
+
+    <!--<link rel="stylesheet" href="http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css">-->
 
 
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" /> -->
 
 
     <script type="text/javascript" src="/vendor/jquery.min.js"></script>
     <!--<script type="text/javascript" src="/vendor/jquery.imgareaselect.min.js"></script>-->
 
     <!--<script type="text/javascript" src="http://emory-lits-labs.github.io/annotator-imgselect/build/0.2.3/annotator.imgselect.min.js"></script>-->
-
+    
+    
     <script type="text/javascript" src="/vendor/angular.min.js"></script>
     <script type="text/javascript" src="/vendor/ng-file-upload-all.min.js"></script>
     <script type="text/javascript" src="/vendor/angular-resource.min.js"></script>
@@ -29,8 +34,9 @@
     <script type="text/javascript" src="/vendor/bricklayer.min.js"></script>
     <script type="text/javascript" src="/vendor/angular-bricklayer.min.js"></script>
     <script type="text/javascript" src="/vendor/angular-uuid4.min.js"></script>
-    
-    
+    <script type="text/javascript" src="/vendor/ui-bootstrap-tpls-2.5.0.min.js"></script>
+
+
     <!--<script type="text/javascript" src="/vendor/annotator-full.min.js"></script>
     <script type="text/javascript" src="/vendor/annotator.imgselect.js"></script>-->
     <!--<script src="https://rawgit.com/mwasiluk/annotator-validation-plugin/master/src/annotator-validation-plugin.js"></script>-->
@@ -50,6 +56,8 @@
 
 
     <script type="text/javascript" src="/javascripts/file-upload.js"></script>
+    <script type="text/javascript" src="/javascripts/ui.js"></script>
+
 
 
 
@@ -59,6 +67,30 @@
 
 
 <body ng-app="fileUpload">
+
+
+    <!-- <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">ICONLAB</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="#/UploadForm"><i class="fa fa-home"></i> Contribute</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore Database <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">By Session</a></li>
+                        <li><a href="#">By Topics</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+                <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+            </ul>
+        </div> 
+    </nav>-->
 
     <div ng-view></div>
 

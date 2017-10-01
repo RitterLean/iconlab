@@ -5,7 +5,8 @@ var app = angular.module('fileUpload', [
     'uuid4',
     'ngTagsInput',
     'annotorious',
-    'jtt_bricklayer'
+    'jtt_bricklayer',
+    'ui.bootstrap'
     // 'mwAnnotator'
 ]);
 var tempFileName, tempID, sessionIdentifier, sessionName;
@@ -33,6 +34,9 @@ app.config(function ($routeProvider, $locationProvider) {
     $routeProvider.
     when('/', {
         templateUrl: '../views/home.html'
+    }).
+    when('/about', {
+        templateUrl: '../views/about.html'
     }).
     when('/viewAll', {
         templateUrl: '../views/viewAll.html'
@@ -70,6 +74,14 @@ app.config(function ($routeProvider, $locationProvider) {
     when('/uploads/image/:uuid/:filename', {
         templateUrl: '../views/viewImage.html'
     }).
+    when('/uploads/imageinfo/:uuid/:filename', {
+        templateUrl: '../views/viewImageInfo.html'
+    }).
+    when('/uploads/imageanno/:uuid/:filename', {
+        templateUrl: '../views/viewImageAnno.html'
+    }).
+
+
     otherwise('/');
 
 });
@@ -90,11 +102,11 @@ app.controller('CtrlUpload', ['$http', 'Upload', '$scope', function ($http, Uplo
         // console.log(response.data);
         $scope.all = response.data;
         //if (sessionStorage.sessionIdentifier != null && sessionStorage.sessionName != null) {
-         if (sessionStorage.Identifier != undefined && sessionStorage.Name != undefined) {   
+        if (sessionStorage.Identifier != undefined && sessionStorage.Name != undefined) {
             $scope.upload = {
                 sessionIdentifier: [sessionStorage.Identifier],
                 sessionName: [sessionStorage.Name]
-           }
+            }
         }
 
 
@@ -446,31 +458,62 @@ app.controller('CtrlImage', ['$http', 'Upload', '$scope', '$routeParams', 'uuid4
             personalRelation: response.data[0].personalRelation,
         }
 
-        
+
         anno.addPlugin('VanillaREST', {
             'prefix': '/uploads',
             'urls': {
                 read: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
                 create: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
-                update: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename+ '/:id',
-                destroy: '/annotate/:id' ,
+                update: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename + '/:id',
+                destroy: '/annotate/:id',
                 search: '/'
             }
         })
     });
 
 
+    $scope.submit = function () {
+        Upload.upload({
+            url: '/uploads/updateImage/' + $routeParams.uuid + '/' + $routeParams.filename,
+            method: 'put',
+            data: $scope.upload
+        }).then(function (response) {
+            // console.log(response.data);
+            $scope.image.push(response.data);
+            // $scope.image = {};
+            console.log("Update")
+        })
+    }
+}]);
 
-    // anno.addPlugin('VanillaREST', {
-    //     'prefix': '/uploads',
-    //     'urls': {
-    //         read: '/annotate/' + sessionStorage.ID + '/' + sessionStorage.FileName,
-    //         create: '/annotate/' + sessionStorage.ID + '/' + sessionStorage.FileName,
-    //         update: '/annotate/' + sessionStorage.ID + '/' + sessionStorage.FileName,
-    //         destroy: '/',
-    //         search: '/'
-    //     }
-    // })
+
+app.controller('CtrlImageInfo', ['$http', 'Upload', '$scope', '$routeParams', 'uuid4', function ($http, Upload, $scope, $routeParams, uuid4) {
+
+
+
+    $http.get('/uploads/image/' + $routeParams.uuid + '/' + $routeParams.filename).then(function (response) {
+        console.log(response.data);
+        $scope.image = response.data;
+        $scope.upload = {
+            sessionName: response.data[0].sessionName,
+            sessionIdentifier: response.data[0].sessionIdentifier,
+            imageInformation: response.data[0].imageInformation,
+            imageDescrp: response.data[0].imageDescrp,
+            personalRelation: response.data[0].personalRelation,
+        }
+
+
+        // anno.addPlugin('VanillaREST', {
+        //     'prefix': '/uploads',
+        //     'urls': {
+        //         read: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
+        //         create: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
+        //         update: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename + '/:id',
+        //         destroy: '/annotate/:id',
+        //         search: '/'
+        //     }
+        // })
+    });
 
 
     $scope.submit = function () {

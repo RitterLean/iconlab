@@ -436,6 +436,19 @@ router.get('/image/:uuid/:filename', function (req, res, next) {
     });
 });
 
+
+router.get('/imageinfo/:uuid/:filename', function (req, res, next) {
+    Upload.find({
+        'file.filename': req.params.uuid,
+        'file.originalname': req.params.filename
+    }, function (err, upload) {
+        if (err) next(err);
+        else {
+            res.send(upload);
+        }
+    });
+});
+
 // router.get('/update/:uuid/:filename', function (req, res, next) {
 //     // console.log(req);
 //     Upload.find({

@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name": "https://github.com/annotorious/annotorious/graphs/contributors"
+  },
+  "name": "annotorious-bower",
+  "keywords": [
+    "annotorious",
+    "image",
+    "annotation",
+    "web"
+  ],
+  "ignore": [],
+  "license": "MIT",
+  "description": "Image Annotation for the Web - Annotorious Core Library",
+  "version": "0.6.4",
+  "main": [
+    "./annotorious.min.js",
+    "./css/annotorious.css",
+    "./images/*.png"
+  ],
+  "dependencies": {},
+  "homepage": "https://github.com/igorlino/annotorious-bower",
+  "_release": "0.6.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.6.4",
+    "commit": "9c68e68329c0668c32dae769878d43748122a581"
+  },
+  "_source": "https://github.com/igorlino/annotorious-bower.git",
+  "_target": "0.6.4",
+  "_originalSource": "annotorious-bower"
+}
