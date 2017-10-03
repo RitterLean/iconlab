@@ -443,6 +443,18 @@ app.controller('CtrlTopic', ['$http', 'Upload', '$scope', '$routeParams', functi
     });
 }]);
 
+
+app.controller('CtrlRandomImage', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
+    
+        // console.log($routeParams.author);
+    
+        $http.get('/uploads/hit').then(function (response) {
+            //console.log(response.data);
+            $scope.topics = response.data;
+        });
+    }]);
+
+
 app.controller('CtrlImage', ['$http', 'Upload', '$scope', '$routeParams', 'uuid4', function ($http, Upload, $scope, $routeParams, uuid4) {
 
 

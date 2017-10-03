@@ -6,7 +6,7 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
-var author;
+// var author;
 
 
 /**
@@ -132,7 +132,9 @@ router.delete('/annotate/:id', upload.single(), function (req, res, next) {
             'imageAnnotation._id': req.params.id
         }, {
             $pull: {
-                imageAnnotation: {_id: req.params.id}
+                imageAnnotation: {
+                    _id: req.params.id
+                }
             }
         },
         function (err, upload) {
@@ -305,6 +307,7 @@ router.get('/', function (req, res, next) {
 
 
 router.get('/sessions', function (req, res, next) {
+    console.log()
     Upload.find().distinct('sessionName', function (err, upload) {
         if (err) {
             next(err);
@@ -324,6 +327,7 @@ router.get('/sessions', function (req, res, next) {
 });
 
 router.get('/topics', function (req, res, next) {
+    console.log("KEsha");
     Upload.find().distinct('name', function (err, upload) {
         if (err) {
             next(err);
@@ -350,11 +354,12 @@ router.get('/topics', function (req, res, next) {
  */
 router.get('/:author', function (req, res, next) {
     console.log(req.params.author);
-    author = req.params.author;
+    console.log("Macklemore");
+    // author = req.params.author;
     Upload.find({
         'sessionName': req.params.author
     }, function (err, upload) {
-        console.log(upload)
+        //console.log(upload)
         if (err) next(err);
         else {
             res.send(upload);
@@ -422,6 +427,29 @@ router.get('/:uuid/:filename', function (req, res, next) {
         }
     });
 });
+
+
+
+router.get('/hit', function (req, res, next) {
+
+    
+    
+    Upload.count().exec(function (err, count) {
+        // Get a random entry
+        var random = Math.floor(Math.random() * count)
+        console.log(count);
+        // Again query all users but only fetch one offset by our random #
+        // Upload.findOne().skip(random).exec(
+        //     function (err, result) {
+        //         // Tada! random user
+        //         console.log(result)
+        //     })
+    })
+
+
+
+});
+
 
 
 router.get('/image/:uuid/:filename', function (req, res, next) {
