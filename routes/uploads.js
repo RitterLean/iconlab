@@ -6,9 +6,11 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
+
 // var author;
 
 
+// s.plugin(random);
 /**
  * Create's the file in the database
  */
@@ -38,40 +40,6 @@ router.post('/', upload.single('file'), function (req, res, next) {
     });
 
 });
-
-
-
-// router.put('/update/:uuid/:filename', upload.fields([
-//   { name: 'name', maxCount: 1 },  
-//   { name: 'CreatorArtist', maxCount: 1 },
-//   { name: 'info', maxCount: 1 }
-// ]), function (req, res, next) {
-
-// router.put('/update/:uuid/:filename', upload.single('file'), function (req, res, next) {
-// // router.put('/update/:uuid/:filename', function (req, res, next) {
-
-//     // console.log("_______________________req.FILES_______________________________________");
-//     // console.log(req.files);
-//     // console.log("_______________________req_______________________________________");
-//     // console.log(req);
-//     console.log("_______________________req.BODY_______________________________________");
-//                 console.log(req.body);
-
-//     Upload.findOneAndUpdate({
-//             'file.filename': req.params.uuid,
-//             'file.originalname': req.params.filename
-//         }, {
-//             $set: {
-//                 tags: {info: 'Troll'}
-//             }
-//         },
-//         function (err, upload) {
-//             if (err) next(err);
-//             else {
-//                 res.send(upload);
-//             }
-//         });
-// });
 
 
 router.post('/annotate/:uuid/:filename', upload.single(), function (req, res, next) {
@@ -307,7 +275,7 @@ router.get('/', function (req, res, next) {
 
 
 router.get('/sessions', function (req, res, next) {
-    console.log()
+    console.log("Sesssion string");
     Upload.find().distinct('sessionName', function (err, upload) {
         if (err) {
             next(err);
@@ -347,14 +315,33 @@ router.get('/topics', function (req, res, next) {
 });
 
 
+router.get('/hit', function (req, res, next) {
+
+    Upload.findOneRandom(function (err, result) {
+        if (!err) {
+            Upload.find({
+                'file.filename': result.file.filename,
+                'file.originalname': result.file.originalname
+            }, function (err, upload) {
+                if (err) next(err);
+                else {
+                    res.send(upload);
+                }
+            });
+        }
+    });
+
+
+
+});
 
 
 /**
  * Gets the list of all files from the database with name
  */
 router.get('/:author', function (req, res, next) {
-    console.log(req.params.author);
-    console.log("Macklemore");
+    // console.log(req.params.author);
+    // console.log("Macklemore");
     // author = req.params.author;
     Upload.find({
         'sessionName': req.params.author
@@ -430,25 +417,7 @@ router.get('/:uuid/:filename', function (req, res, next) {
 
 
 
-router.get('/hit', function (req, res, next) {
 
-    
-    
-    Upload.count().exec(function (err, count) {
-        // Get a random entry
-        var random = Math.floor(Math.random() * count)
-        console.log(count);
-        // Again query all users but only fetch one offset by our random #
-        // Upload.findOne().skip(random).exec(
-        //     function (err, result) {
-        //         // Tada! random user
-        //         console.log(result)
-        //     })
-    })
-
-
-
-});
 
 
 

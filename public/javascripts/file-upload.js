@@ -38,6 +38,9 @@ app.config(function ($routeProvider, $locationProvider) {
     when('/about', {
         templateUrl: '../views/about.html'
     }).
+    when('/hit', {
+        templateUrl: '../views/home.html'
+    }).
     when('/viewAll', {
         templateUrl: '../views/viewAll.html'
     }).
@@ -435,7 +438,6 @@ app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', f
 
 app.controller('CtrlTopic', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
 
-    // console.log($routeParams.author);
 
     $http.get('/uploads/topics').then(function (response) {
         console.log(response.data);
@@ -444,15 +446,15 @@ app.controller('CtrlTopic', ['$http', 'Upload', '$scope', '$routeParams', functi
 }]);
 
 
-app.controller('CtrlRandomImage', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
-    
-        // console.log($routeParams.author);
-    
-        $http.get('/uploads/hit').then(function (response) {
-            //console.log(response.data);
-            $scope.topics = response.data;
-        });
-    }]);
+app.controller('RandomImage', ['$http', 'Upload', '$scope', '$routeParams', 'uuid4', function ($http, Upload, $scope, $routeParams, uuid4) {
+
+
+    $http.get('/uploads/hit').then(function (response) {
+        console.log(response.data);
+        $scope.image = response.data;
+        //$scope.topics = response.data;
+    });
+}]);
 
 
 app.controller('CtrlImage', ['$http', 'Upload', '$scope', '$routeParams', 'uuid4', function ($http, Upload, $scope, $routeParams, uuid4) {

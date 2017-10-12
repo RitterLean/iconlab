@@ -1,29 +1,9 @@
-<!-- <a href="#/viewAll">View All</a></br>
-<a href="#/viewSessions">View Sessions by</a></br>
-<a href="#/topics">Motives and Tags</a></br>
-<a href="#/UploadForm">Upload an Image</a></br> -->
-
-
-
-<!-- <style>
-    .horizontal-collapse {
-        height: 70px;
-    }
-
-    .navbar-collapse.in {
-        overflow-y: hidden;
-    }
-</style> -->
-
-<div ng-controller="CtrlRandomImage" id="example-form" action="#">
-    <h2>Image is here:</h2>
+<div ng-controller="RandomImage" id="example-form" action="#">
+    <h2>Image of random</h2>
     <ul>
         <li ng-repeat="upload in ::image">
-            <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
-            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
-            <a href="#/uploads/imageanno/{{upload.file.filename}}/{{upload.file.originalname}}">Annotations of this image</a></br>
-            <a href="#/uploads/imageinfo/{{upload.file.filename}}/{{upload.file.originalname}}">Info to this image</a></br>
-
+            <!-- <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br> -->
+            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'/>
         </li>
 
     </ul>

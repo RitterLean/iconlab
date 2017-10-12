@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var random = require('mongoose-simple-random');
+
+
 
 // var UploadSchema = mongoose.Schema({
 //     name: Array,
@@ -70,6 +73,8 @@ var UploadSchema = mongoose.Schema({
     links: linksSchema,
     sessionRecording: Array
 });
+
+UploadSchema.plugin(random);
 
 
 
