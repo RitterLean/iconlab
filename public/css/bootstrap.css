@@ -8,20 +8,20 @@
 
 @font-face {
   font-family: AkkuratStd;
-  font-weight: regular;
-  src: local('AkkuratStd'), url('fonts/AkkuratStd-Regular.otf'), format('opentype');
+  font-weight: normal;
+  src: url('/fonts/AkkuratStd-Regular.otf') format('opentype');
 }
 
 @font-face {
   font-family: AkkuratStd;
   font-weight: bold;
-  src: local('AkkuratStd'), url('fonts/AkkuratStd-Bold.otf'), format('opentype');
+  src: local('AkkuratStd'), url('/fonts/AkkuratStd-Bold.otf'), format('opentype');
 }
 
 @font-face {
   font-family: AkkuratStd;
   font-weight: italic;
-  src: local('AkkuratStd'), url('fonts/AkkuratStd-Italic.otf'), format('opentype');
+  src: local('AkkuratStd'), url('/fonts/AkkuratStd-Italic.otf'), format('opentype');
 }
 
 
