@@ -159,26 +159,13 @@ annotorious.plugin.VanillaREST = (function () {
      * @private
      */
     VanillaREST.prototype._create = function (annotation) {
-        // var self = this;
-        // jQuery.post(this._getActionUrl('create', null), this._getAnnotationData(annotation), function (response) {
-        //     console.log(response);
-        //     //annotation.id = response['id'];
-        // })
-
-        // console.log(annotation);
-        // var huso = uuid4.generate();
-        // console.log("huso= "+ huso);
         var self = this;
-
-
         jQuery.ajax({
                 url: this._getActionUrl('create', null),
                 type: 'POST',
                 data: this._getAnnotationData(annotation),
                 contentType: 'application/json; charset=utf-8'
-
             })
-
             .fail(function (jqXHR) {
                 self._onResponseError(jqXHR, 'create');
             });
@@ -190,7 +177,7 @@ annotorious.plugin.VanillaREST = (function () {
      * @private
      */
     VanillaREST.prototype._update = function (annotation) {
-        console.log(annotation);
+        // console.log(annotation);
         //console.log(this._getAnnotationData(annotation));
         var self = this;
         jQuery.ajax({
@@ -207,9 +194,12 @@ annotorious.plugin.VanillaREST = (function () {
      * @private
      */
     VanillaREST.prototype._delete = function (annotation) {
+        var self = this;        
         jQuery.ajax({
             url: this._getActionUrl('destroy', annotation._id),
-            type: 'DELETE'
+            type: 'DELETE',
+            data: this._getAnnotationData(annotation),
+            contentType: 'application/json; charset=utf-8'            
         }).fail(function (jqXHR) {
             self._onResponseError(jqXHR, 'delete');
         });

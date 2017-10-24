@@ -498,6 +498,20 @@ app.controller('CtrlImage', ['$http', 'Upload', '$scope', '$routeParams', 'uuid4
             console.log("Update")
         })
     }
+
+    $scope.delete = function () {
+        // console.log("fuck");
+        Upload.upload({
+            url: '/uploads/delete/' + $routeParams.uuid + '/' + $routeParams.filename,
+            method: 'delete',
+            data: $scope.upload
+        }).then(function (response) {
+            // console.log(response.data);
+            // $scope.image.push(response.data);
+            // $scope.image = {};
+            console.log("Update")
+        })
+    }
 }]);
 
 
@@ -515,18 +529,6 @@ app.controller('CtrlImageInfo', ['$http', 'Upload', '$scope', '$routeParams', 'u
             imageDescrp: response.data[0].imageDescrp,
             personalRelation: response.data[0].personalRelation,
         }
-
-
-        // anno.addPlugin('VanillaREST', {
-        //     'prefix': '/uploads',
-        //     'urls': {
-        //         read: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
-        //         create: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
-        //         update: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename + '/:id',
-        //         destroy: '/annotate/:id',
-        //         search: '/'
-        //     }
-        // })
     });
 
 
