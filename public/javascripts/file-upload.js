@@ -7,22 +7,18 @@ var app = angular.module('fileUpload', [
     'annotorious',
     'jtt_bricklayer',
     'ui.bootstrap'
-    // 'mwAnnotator'
-]);
-var tempFileName, tempID, sessionIdentifier, sessionName;
+]).directive('search', function () {
+    return function ($scope, element) {
+        element.bind("keyup", function (event) {
+            var val = element.val();
+            if (val.length > 2) {
+                $scope.search(val);
+            }
+        });
+    };
+});
+var tempFileName, tempID, sessionIdentifier, sessionName, searchQuery;
 var init = true;
-
-
-// if (sessionStorage.sessionIdentifier == undefined && sessionStorage.sessionName == undefined) {
-//     console.log("Init");
-//     sessionIdentifier = null
-//     sessionStorage.setItem("Identifier", sessionIdentifier);
-
-//     sessionName = null
-//     sessionStorage.setItem("Name", sessionName);
-
-// }
-
 
 
 
@@ -83,6 +79,9 @@ app.config(function ($routeProvider, $locationProvider) {
     when('/uploads/imageanno/:uuid/:filename', {
         templateUrl: '../views/viewImageAnno.html'
     }).
+    when('/uploads/search/:tag', {
+        templateUrl: '../views/searchResult.html'
+    }).
 
 
     otherwise('/');
@@ -98,6 +97,54 @@ app.config(['$qProvider', function ($qProvider) {
 
 
 
+
+
+
+
+app.controller('CollapseDemoCtrl', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
+    var searchKeys = [];
+    //console.log(val);
+    $http.get('/uploads/search')
+        .then(function (response) {
+            console.log(response.data)
+            for (let j = 0, dataLength = response.data.length; j < dataLength; j++) {
+                Object.keys(response.data[j]._id).forEach(function (key, index) {
+                    //console.log(response.data[j]._id[key]);
+                    for (let i = 0, l = response.data[j]._id[key].length; i < l; i++) {
+                        // console.log(response.data[j]._id[key][i]);
+                        if (searchKeys.indexOf(response.data[j]._id[key][i]) == -1) {
+                            searchKeys.push(response.data[j]._id[key][i]);
+                        }
+
+                        // console.log(searchKeys);
+                    }
+                });
+            }
+
+            $scope.tags = searchKeys; //retrieve results and add to existing results
+        })
+    $scope.search = function (val) {
+    }
+
+    $scope.submit = function () {
+        sessionStorage.setItem("searchQuery", $scope.selected);
+        //window.location.href = "www.google.de";
+        /*console.log($scope.selected);
+        Upload.upload({
+            url: '/uploads/searchquery/'+ $scope.selected,
+            method: 'get',
+        }).then(function(){
+            
+            sessionStorage.setItem("searchQuery", $scope.selected);
+            console.log(sessionStorage.searchQuery);
+
+            
+        });*/
+        // window.location.href = "www.google.de";
+        // $http.get('/uploads/search').then
+    }
+
+}]);
 
 app.controller('CtrlUpload', ['$http', 'Upload', '$scope', function ($http, Upload, $scope) {
 
@@ -450,7 +497,7 @@ app.controller('RandomImage', ['$http', 'Upload', '$scope', '$routeParams', 'uui
 
 
     $http.get('/uploads/hit').then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         $scope.image = response.data;
         //$scope.topics = response.data;
     });
