@@ -18,26 +18,26 @@ var random = require('mongoose-simple-random');
 
 
 
-var ImageInformationSchema = mongoose.Schema({
-    artist: Array,
-    publishingYear: Array,
-    publishingLocation: Array,
-    medium: Array,
-    form: Array
-});
+// var ImageInformationSchema = mongoose.Schema({
+//     artist: Array,
+//     publishingYear: Array,
+//     publishingLocation: Array,
+//     medium: Array,
+//     form: Array
+// });
 
-var ImageDescrpSchema = mongoose.Schema({
-    motives: Array,
-    motivesRevolution: Array,
-    revolutionLocation: Array
-});
+// var ImageDescrpSchema = mongoose.Schema({
+//     motives: Array,
+//     motivesRevolution: Array,
+//     revolutionLocation: Array
+// });
 
-var PersonalRelationSchema = mongoose.Schema({
-    source: Array,
-    placeFoundFirst: Array,
-    dateFoundFirst: Array,
-    time: Array
-});
+// var PersonalRelationSchema = mongoose.Schema({
+//     source: Array,
+//     placeFoundFirst: Array,
+//     dateFoundFirst: Array,
+//     time: Array
+// });
 
 var imageAnnotationSchema = mongoose.Schema({
         src: String,
@@ -61,9 +61,21 @@ var UploadSchema = mongoose.Schema({
     sessionIdentifier: Array,
     created: Date,
     file: Object,
-    imageInformation: ImageInformationSchema,
-    imageDescrp: ImageDescrpSchema,
-    personalRelation: PersonalRelationSchema,
+    //imageInformation: ImageInformationSchema,
+    artist: Array,
+    publishingYear: Array,
+    publishingLocation: Array,
+    medium: Array,
+    form: Array,
+    //imageDescrp: ImageDescrpSchema,
+    motives: Array,
+    motivesRevolution: Array,
+    // revolutionLocation: Array,
+    //personalRelation: PersonalRelationSchema,
+    source: Array,
+    placeFoundFirst: Array,
+    dateFoundFirst: Array,
+    time: Array,
     imageAnnotation: [imageAnnotationSchema],
     links: linksSchema,
     sessionRecording: Array
@@ -95,10 +107,24 @@ UploadSchema.plugin(random);
 
 });*/
 UploadSchema.index({
-    // 'sessionName': 'text',
-    // sessionIdentifier: 'text',
-    // created: 'text',
-    '$**': 'text'
+    sessionName: 'text',
+    sessionIdentifier: 'text',
+    created: 'text',
+    artist: 'text',
+    publishingYear: 'text',
+    publishingLocation: 'text',
+    medium: 'text',
+    form: 'text',
+    motives: 'text',
+    motivesRevolution: 'text',
+    source: 'text',
+    placeFoundFirst: 'text',
+    dateFoundFirst: 'text',
+    time: 'text',
+
+    links: linksSchema,
+    sessionRecording: Array
+    //'$**': 'text'
 });
 
 module.exports = mongoose.model('Upload', UploadSchema);

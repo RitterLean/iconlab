@@ -17,16 +17,29 @@ router.post('/', upload.single('file'), function (req, res, next) {
     var newUpload = {
         sessionName: req.body.sessionName,
         sessionIdentifier: req.body.sessionIdentifier,
-        imageInformation: null,
-        imageDescrp: null,
-        personalRelation: null,
-        imageAnnotation: [],
-        links: null,
-        sessionRecording: null,
+        // imageInformation: null,
+        /* artist: null,
+         publishingYear: null,
+         publishingLocation: null,
+         medium: null,
+         form: null,
+         // imageDescrp: null,
+         motives: null,
+         motivesRevolution: null,
+         // revolutionLocation: null,
+         // personalRelation: null,
+         source: null,
+         placeFoundFirst: null,
+         dateFoundFirst: null,
+         time: null,
+         imageAnnotation: [],
+         links: null,
+         sessionRecording: null,*/
         created: Date.now(),
         file: req.file
 
     };
+    // console.log(newUpload);
     Upload.create(newUpload, function (err, next) {
         if (err) {
             next(err);
@@ -66,11 +79,27 @@ router.put('/updateImage/:uuid/:filename', upload.single(), function (req, res, 
             'file.originalname': req.params.filename
         }, {
             $set: {
+                // sessionName: req.body.sessionName,
+                // sessionIdentifier: req.body.sessionIdentifier,
+                // imageInformation: req.body.imageInformation,
+                // imageDescrp: req.body.imageDescrp,
+                // personalRelation: req.body.personalRelation,
+
+
+
                 sessionName: req.body.sessionName,
                 sessionIdentifier: req.body.sessionIdentifier,
-                imageInformation: req.body.imageInformation,
-                imageDescrp: req.body.imageDescrp,
-                personalRelation: req.body.personalRelation,
+                artist: req.body.artist,
+                publishingYear: req.body.publishingYear,
+                publishingLocation: req.body.publishingLocation,
+                medium: req.body.medium,
+                form: req.body.form,
+                motives: req.body.motives,
+                motivesRevolution: req.body.motivesRevolution,
+                source: req.body.source,
+                placeFoundFirst: req.body.placeFoundFirst,
+                dateFoundFirst: req.body.dateFoundFirst,
+                time: req.body.time,
             }
         },
         function (err, upload) {
@@ -84,24 +113,24 @@ router.put('/updateImage/:uuid/:filename', upload.single(), function (req, res, 
 
 
 
-router.put('/updateUploadData/:uuid/:filename', upload.single(), function (req, res, next) {
-    console.log(req.body);
-    Upload.findOneAndUpdate({
-            'file.filename': req.params.uuid,
-            'file.originalname': req.params.filename
-        }, {
-            $set: {
-                sessionName: req.body.sessionName,
-                sessionIdentifier: req.body.sessionIdentifier
-            }
-        },
-        function (err, upload) {
-            if (err) next(err);
-            else {
-                res.send(upload);
-            }
-        });
-});
+// router.put('/updateUploadData/:uuid/:filename', upload.single(), function (req, res, next) {
+//     console.log(req.body);
+//     Upload.findOneAndUpdate({
+//             'file.filename': req.params.uuid,
+//             'file.originalname': req.params.filename
+//         }, {
+//             $set: {
+//                 sessionName: req.body.sessionName,
+//                 sessionIdentifier: req.body.sessionIdentifier
+//             }
+//         },
+//         function (err, upload) {
+//             if (err) next(err);
+//             else {
+//                 res.send(upload);
+//             }
+//         });
+// });
 
 
 
@@ -132,21 +161,25 @@ router.get('/search/:tag', function (req, res, next) {
     //     }
     // });
 
-    /*Upload.find({ $text: { $search:req.params.tag } }, function (err, uploads) {
+    Upload.find({ $text: { $search:req.params.tag } }, function (err, uploads) {
         if (err) next(err);
         else {
             // res.send(uploads);
             res.json(uploads);
         }
-    });*/
-    Upload.find({ sessionName:{$regex: req.params.tag} }, function (err, uploads) {
-        if (err) next(err);
-        else {
-            // res.send(uploads);
-            res.json(uploads);
-        }
-        
-    })
+    });
+    // Upload.find({
+    //     sessionName: {
+    //         $regex: req.params.tag
+    //     }
+    // }, function (err, uploads) {
+    //     if (err) next(err);
+    //     else {
+    //         // res.send(uploads);
+    //         res.json(uploads);
+    //     }
+
+    // })
 
 
     /*Upload.aggregate(
@@ -187,7 +220,7 @@ router.get('/search', function (req, res, next) {
     Upload.aggregate(
         [{
             "$group": {
-                "_id": 
+                "_id":
                 /*name: { $addToSet: "$sessionName"},
                 artist:{$addToSet: "$imageInformation.artist"},
                 publishingYear:{$addToSet: "$imageInformation.publishingYear"},
@@ -201,19 +234,23 @@ router.get('/search', function (req, res, next) {
                 dateFoundFirst:{$addToSet: "$personalRelation.dateFoundFirst"},
                 time:{$addToSet: "$personalRelation.time"},*/
                 {
-                    sessionName:"$sessionName",
-                    artist:"$imageInformation.artist",
-                    publishingYear:"$imageInformation.publishingYear",
-                    publishingLocation:"$imageInformation.publishingLocation",
-                    medium:"$imageInformation.medium",
-                    form:"$imageInformation.form",
-                    motivesR: "$imageDescrp.motivesRevolution",
-                    motives: "$imageDescrp.motives",
-                    form:"$personalRelation.source",
-                    placeFoundFirst:"$personalRelation.placeFoundFirst",
-                    dateFoundFirst:"$personalRelation.dateFoundFirst",
-                    time:"$personalRelation.time",
-                    
+                    sessionName: "$sessionName",
+                    sessionIdentifier: "$sessionIdentifier",
+                    artist: "$artist",
+                    publishingYear: "$publishingYear",
+                    publishingLocation: "$publishingLocation",
+                    medium: "$medium",
+                    form: "$form",
+                    motivesR: "$motivesRevolution",
+                    motives: "$motives",
+                    source: '$source',
+                    form: "$source",
+                    placeFoundFirst: "$placeFoundFirst",
+                    dateFoundFirst: "$dateFoundFirst",
+                    time: "$time",
+
+                
+
                 }
 
             }
@@ -224,7 +261,7 @@ router.get('/search', function (req, res, next) {
             } else {
                 console.log(upload)
                 res.send(upload);
-               
+
             }
         });
 
@@ -369,10 +406,17 @@ router.put('/formImageInfo/:uuid/:filename', upload.single(), function (req, res
             'file.originalname': req.params.filename
         }, {
             $set: {
-
-                imageInformation: req.body.imageInformation
-
+                artist: req.body.artist,
+                publishingYear: req.body.publishingYear,
+                publishingLocation: req.body.publishingLocation,
+                medium: req.body.medium,
+                form: req.body.form
             }
+            // ,
+            // $unset: {
+            //     motives: "",
+            //     motivesRevolution: ""
+            // }
         },
         function (err, upload) {
             if (err) next(err);
@@ -384,40 +428,37 @@ router.put('/formImageInfo/:uuid/:filename', upload.single(), function (req, res
 
 
 router.put('/formImageDes/:uuid/:filename', upload.single(), function (req, res, next) {
+    // Upload.findOneAndUpdate({
+    //         'file.filename': req.params.uuid,
+    //         'file.originalname': req.params.filename
+    //     }, {
+    //         $unset: {
+
+    //             // imageDescrp: req.body.imageDescrp
+    //             motives: "",
+    //             motivesRevolution: ""
+    //         }
+    //     },
+    //     function (err, upload) {
+    //         if (err) next(err);
+    //         else {
+    //             res.send(upload);
+    //         }
+    //     });
+    // console.log("weiter");
+
     // console.log(sessionStorage);
+    console.log(req.body);
+
     Upload.findOneAndUpdate({
             'file.filename': req.params.uuid,
             'file.originalname': req.params.filename
         }, {
             $set: {
-
-                imageDescrp: req.body.imageDescrp
-
-            }
-        },
-        function (err, upload) {
-            if (err) next(err);
-            else {
-                res.send(upload);
-            }
-        });
-});
-
-
-router.put('/formImageDesLocation/:uuid/:filename', upload.single(), function (req, res, next) {
-    // console.log(sessionStorage);
-    Upload.findOneAndUpdate({
-            'file.filename': req.params.uuid,
-            'file.originalname': req.params.filename
-        }, {
-            $set: {
-
-                imageDescrp: {
-                    revolutionLocation: req.body.imageDescrp.revolutionLocation
-
-                }
-            }
-        },
+                // imageDescrp: req.body.imageDescrp
+                motives: req.body.motives,
+                motivesRevolution: req.body.motivesRevolution
+            }}, {upsert: true},
         function (err, upload) {
             if (err) next(err);
             else {
@@ -429,13 +470,19 @@ router.put('/formImageDesLocation/:uuid/:filename', upload.single(), function (r
 
 router.put('/formPRelation/:uuid/:filename', upload.single(), function (req, res, next) {
     // console.log(sessionStorage);
+    console.log(req.body);
     Upload.findOneAndUpdate({
             'file.filename': req.params.uuid,
             'file.originalname': req.params.filename
         }, {
             $set: {
 
-                personalRelation: req.body.personalRelation
+                source: req.body.source,
+                placeFoundFirst: req.body.placeFoundFirst,
+                dateFoundFirst: req.body.dateFoundFirst,
+                time: req.body.time
+
+                // personalRelation: req.body.personalRelation
 
             }
         },
@@ -446,6 +493,31 @@ router.put('/formPRelation/:uuid/:filename', upload.single(), function (req, res
             }
         });
 });
+
+
+
+// router.put('/formImageDesLocation/:uuid/:filename', upload.single(), function (req, res, next) {
+//     // console.log(sessionStorage);
+//     Upload.findOneAndUpdate({
+//             'file.filename': req.params.uuid,
+//             'file.originalname': req.params.filename
+//         }, {
+//             $set: {
+
+//                 imageDescrp: {
+//                     revolutionLocation: req.body.revolutionLocation
+
+//                 }
+//             }
+//         },
+//         function (err, upload) {
+//             if (err) next(err);
+//             else {
+//                 res.send(upload);
+//             }
+//         });
+// });
+
 
 
 

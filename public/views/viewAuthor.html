@@ -20,8 +20,11 @@
     <div class="bricklayer" ng-cloak>
             <!-- append -->
             <div bricklayer-append ng-repeat="upload in author" ng-cloak>
+                <!-- <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}"> -->
+                <a href="#/uploads/imageinfo/{{upload.file.filename}}/{{upload.file.originalname}}">
+                    
                     <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' ng-href='#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}'/>
-                    <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}">Info to this image</a></br>
+                    </a></br>
             </div>
 
 </div>
