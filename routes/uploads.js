@@ -161,7 +161,11 @@ router.get('/search/:tag', function (req, res, next) {
     //     }
     // });
 
-    Upload.find({ $text: { $search:req.params.tag } }, function (err, uploads) {
+    Upload.find({
+        $text: {
+            $search: req.params.tag
+        }
+    }, function (err, uploads) {
         if (err) next(err);
         else {
             // res.send(uploads);
@@ -249,7 +253,7 @@ router.get('/search', function (req, res, next) {
                     dateFoundFirst: "$dateFoundFirst",
                     time: "$time",
 
-                
+
 
                 }
 
@@ -268,15 +272,63 @@ router.get('/search', function (req, res, next) {
 });
 
 router.get('/sessions', function (req, res, next) {
-    console.log("Sesssion string");
-    Upload.find().distinct('sessionName', function (err, upload) {
-        if (err) {
-            next(err);
-        } else {
-            res.send(upload);
-        }
-    });
+    // Upload.find().distinct('sessionName', function (err, upload) {
+    //     if (err) {
+    //         next(err);
+    //     } else {
+    //         res.send(upload);
+    //     }
+    // });
+
+
+    Upload.aggregate(
+        [
+            {
+                $group: {
+                    _id:
+                    /*name: { $addToSet: "$sessionName"},
+                    artist:{$addToSet: "$imageInformation.artist"},
+                    publishingYear:{$addToSet: "$imageInformation.publishingYear"},
+                    publishingLocation:{$addToSet: "$imageInformation.publishingLocation"},
+                    medium:{$addToSet: "$imageInformation.medium"},
+                    form:{$addToSet: "$imageInformation.form"},
+                    motivesR: {$addToSet: "$imageDescrp.motivesRevolution"},
+                    motives: {$addToSet: "$imageDescrp.motives"},
+                    form:{$addToSet: "$personalRelation.source"},
+                    placeFoundFirst:{$addToSet: "$personalRelation.placeFoundFirst"},
+                    dateFoundFirst:{$addToSet: "$personalRelation.dateFoundFirst"},
+                    time:{$addToSet: "$personalRelation.time"},*/
+                    {
+                        sessionIdentifier: "$sessionIdentifier",
+                        sessionName: "$sessionName",
+                        // motives: "$motives"
+
+                    }
+
+
+                }
+            },
+            // {
+            //     $project: {
+            //         "_id.sessionIdentifier": 1,
+            //         "_id.sessionName": 1
+            //     }
+            // }
+        ],
+        function (err, upload) {
+            if (err) {
+                next(err);
+            } else {
+                console.log(upload)
+                res.send(upload);
+
+            }
+        });
 });
+
+
+
+
 
 router.get('/topics', function (req, res, next) {
     Upload.find().distinct('name', function (err, upload) {
@@ -324,12 +376,13 @@ router.get('/hit', function (req, res, next) {
 /**
  * Gets the list of all files from the database with name
  */
-router.get('/:author', function (req, res, next) {
+router.get('/collection/:author/:id', function (req, res, next) {
     // console.log(req.params.author);
     // console.log("Macklemore");
     // author = req.params.author;
     Upload.find({
-        'sessionName': req.params.author
+        'sessionName': req.params.author,
+        'sessionIdentifier': req.params.id
     }, function (err, upload) {
         //console.log(upload)
         if (err) next(err);
@@ -458,7 +511,10 @@ router.put('/formImageDes/:uuid/:filename', upload.single(), function (req, res,
                 // imageDescrp: req.body.imageDescrp
                 motives: req.body.motives,
                 motivesRevolution: req.body.motivesRevolution
-            }}, {upsert: true},
+            }
+        }, {
+            upsert: true
+        },
         function (err, upload) {
             if (err) next(err);
             else {

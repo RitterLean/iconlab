@@ -19,7 +19,7 @@
         <li ng-repeat="upload in sessions">
 
             <!--<a ng-href="uploads/{{upload.names}}"> {{upload}} <a> </br>-->
-            <a href="#/uploads/{{upload}}">{{upload}}</a></br>
+            <a href="#/uploads/collection/{{upload._id.sessionName[0]}}/{{upload._id.sessionIdentifier[0]}}">{{upload._id.sessionName[0]}} (SessionID is "{{upload._id.sessionIdentifier[0]}}")</a></br>
 
         </li>
     </ul>

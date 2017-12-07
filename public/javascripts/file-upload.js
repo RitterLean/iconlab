@@ -67,7 +67,7 @@ app.config(function ($routeProvider, $locationProvider) {
     when('/uploads/update/:uuid/:filename', {
         templateUrl: '../views/updateForm.html'
     }).
-    when('/uploads/:author', {
+    when('/uploads/collection/:author/:id', {
         templateUrl: '../views/viewAuthor.html'
     }).
     when('/uploads/image/:uuid/:filename', {
@@ -466,8 +466,25 @@ app.controller('CtrlUpdatePersonalRelationSub', ['$http', 'Upload', '$scope', '$
 app.controller('formCtrlSessions', ['$http', 'Upload', '$scope', function ($http, Upload, $scope) {
 
     $http.get('/uploads/sessions').then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         $scope.sessions = response.data;
+
+        for (let j = 0, dataLength = response.data.length; j < dataLength; j++) {
+            console.log(response.data[j]);
+            // Object.keys(response.data[j]._id).forEach(function (key, index) {
+            //     //console.log(response.data[j]._id[key]);
+            //     for (let i = 0, l = response.data[j]._id[key].length; i < l; i++) {
+            //         //console.log(response.data[j]._id[key][i]);
+            //         if (searchKeys.indexOf(response.data[j]._id[key][i]) == -1) {
+            //             searchKeys.push(response.data[j]._id[key][i]);
+            //         }
+
+                    
+            //     }
+            // });
+        }
+
+
     });
 
 
@@ -478,7 +495,7 @@ app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', f
 
     // console.log($routeParams.author);
 
-    $http.get('/uploads/' + $routeParams.author).then(function (response) {
+    $http.get('/uploads/collection/' + $routeParams.author + '/' +$routeParams.id).then(function (response) {
         console.log(response.data);
         $scope.author = response.data;
     });

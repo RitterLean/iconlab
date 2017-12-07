@@ -1,11 +1,12 @@
 <div ng-controller="RandomImage" id="example-form" action="#">
     <div ng-repeat="upload in ::image">
+      <div class="container"><a href="#/uploads/imageinfo/{{upload.file.filename}}/{{upload.file.originalname}}">
+        
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'/>
+      </a></div>
             <!-- <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br> -->
             <!-- <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}"> -->
-              <a href="#/uploads/imageinfo/{{upload.file.filename}}/{{upload.file.originalname}}">
-              
-              <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'/>
-            </a></br>
+
             
 
       </div>
