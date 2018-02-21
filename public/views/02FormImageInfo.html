@@ -1,15 +1,15 @@
 <div ng-controller="CtrlUpdateImageInformation">
     <h2>Image Information</h2>
 
-     <li ng-repeat="upload in ::image">  
-    <!-- <li ng-model= image> -->
-        <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+    <div class="col-sm-6" id="left" ng-repeat="upload in ::image">
+        <!-- <li ng-model= image> -->
+        <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a>
+        </br>
         <!--<a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
         <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+    </div>
 
-    </li>
-
-
+     <div class="col-sm-6" id="right">
     <form ng-submit="submit()">
         <legend>Please provide basic image information:</legend>
 
@@ -42,12 +42,14 @@
         <br/>
         <!--<label for="tags">TEST</label>
         <tags-input ng-model="tags"></tags-input>-->
-
-
         <input type="submit" value="Submit" />
     </form>
+    <br/>
+    <a href="#/formImageDes">Next</a>
+    </div>
 </div>
 
 <!--<a href="#/viewAll">View All</a></br>
 <a href="#/viewSessions">View Sessions by</a></br>-->
-<a href="#/formImageDes">Next</a></br>
+
+</br>

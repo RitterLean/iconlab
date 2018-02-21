@@ -1,21 +1,24 @@
 <div ng-controller="CtrlUpdatePersonalRelationSub">
 
     <h2>Upload</h2>
-            <li ng-repeat="upload in ::image">
+    <div class="col-sm-6" id="left" ng-repeat="upload in ::image">
+
         <!--<a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
             <a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
             <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
             
-    </li>
+        </div>
     
     <form ng-submit="submit()">
         <legend>Upload a new file here:</legend>
         
-        <label for="Relation">Relation (search for relateted images | Not implmented yet…sorry):</label>
+        <label for="Relation">Relation (search for relateted images | Not implmented yet…sorry):</label></br>
         <input type="text" name="Relation" id="Relation" ng-model="upload.Relation" />
         <br/>
     </form>
+    <br/>
+
+    <a href="#/UploadForm">Next Image</a></br>
+<a href="#/viewSessions">View Sessions by</a></br>
 </div>
 
-<a href="#/UploadForm">Next Image</a></br>
-<a href="#/viewSessions">View Sessions by</a></br>

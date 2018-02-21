@@ -107,7 +107,7 @@ UploadSchema.plugin(random);
 
 });*/
 UploadSchema.index({
-    sessionName: 'text',
+    /*sessionName: 'text',
     sessionIdentifier: 'text',
     created: 'text',
     artist: 'text',
@@ -123,8 +123,8 @@ UploadSchema.index({
     time: 'text',
 
     links: linksSchema,
-    sessionRecording: Array
-    //'$**': 'text'
+    sessionRecording: Array*/
+    '$**': 'text'
 });
 
 module.exports = mongoose.model('Upload', UploadSchema);

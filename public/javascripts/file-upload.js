@@ -305,9 +305,9 @@ app.controller('CtrlUpdateImageDescrip', ['$http', 'Upload', '$scope', '$routePa
         //         imageInformation: response.data[0].tags.imageInformation
         //     },
         // }
-        $scope.upload = {
-            tags: response.data.tags
-        }
+        // $scope.upload = {
+        //     tags: response.data.tags
+        // }
     });
     $scope.submit = function () {
         console.log($scope.upload);
